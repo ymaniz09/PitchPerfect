@@ -16,34 +16,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1V-Ga-Ine">
-                                <rect key="frame" x="182.5" y="433" width="49" height="30"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                <state key="normal" title="Record"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0RB-ay-Xde">
+                                <rect key="frame" x="154" y="561.5" width="106" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1V-Ga-Ine">
+                                <rect key="frame" x="129.5" y="370.5" width="155" height="155"/>
+                                <state key="normal" image="Record"/>
                                 <connections>
                                     <action selector="recordAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AMk-nr-Xjg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLM-FQ-agE">
+                                <rect key="frame" x="175" y="609.5" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="5PY-1c-48e"/>
+                                    <constraint firstAttribute="width" constant="64" id="bqt-AA-peY"/>
+                                </constraints>
+                                <state key="normal" image="Stop"/>
+                                <connections>
+                                    <action selector="stopRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QFi-G3-i0L"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="0RB-ay-Xde" firstAttribute="top" secondItem="d1V-Ga-Ine" secondAttribute="bottom" constant="36" id="IMv-3Q-Kvd"/>
+                            <constraint firstItem="XLM-FQ-agE" firstAttribute="top" secondItem="d1V-Ga-Ine" secondAttribute="bottom" constant="84" id="KUw-uB-PIq"/>
+                            <constraint firstItem="0RB-ay-Xde" firstAttribute="centerX" secondItem="d1V-Ga-Ine" secondAttribute="centerX" id="Kpw-sk-Scs"/>
                             <constraint firstItem="d1V-Ga-Ine" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="PeI-w5-vrP"/>
                             <constraint firstItem="d1V-Ga-Ine" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sjy-Bh-LfI"/>
+                            <constraint firstItem="XLM-FQ-agE" firstAttribute="centerX" secondItem="d1V-Ga-Ine" secondAttribute="centerX" id="t2j-l7-a0b"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="recordingButton" destination="d1V-Ga-Ine" id="xUs-Sb-M5d"/>
+                        <outlet property="recordingLabel" destination="0RB-ay-Xde" id="uav-ZC-qgf"/>
+                        <outlet property="stopRecordingButton" destination="XLM-FQ-agE" id="v0l-LQ-cTW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="131.91964285714286"/>
+            <point key="canvasLocation" x="-143" y="108"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Record" width="155" height="155"/>
+        <image name="Stop" width="155" height="155"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
