@@ -16,6 +16,11 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopRecordingButton: UIButton!
     
+    struct Labels {
+        static let RecordingInProgressLabel = "Recording in progress"
+        static let TapToRecordLabel = "Tap to Record"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,9 +28,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func recordAudio(_ sender: Any) {
-        recordingLabel.text = "Recording in progress"
-        stopRecordingButton.isEnabled = true
-        recordButton.isEnabled = false
+        configureIdleUi(false)
         
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
         let recordingName = "recordedVoice.wav"
@@ -43,9 +46,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func stopRecording(_ sender: Any) {
-        recordButton.isEnabled = true
-        stopRecordingButton.isEnabled = false
-        recordingLabel.text = "Tap to Record"
+        configureIdleUi(true)
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
@@ -57,6 +58,13 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         } else {
             print("Recording was not successfull")
         }
+    }
+    
+    func configureIdleUi(_ enabled: Bool) {
+        recordButton.isEnabled = enabled
+        stopRecordingButton.isEnabled = !enabled
+        
+        recordingLabel.text = enabled ? Labels.TapToRecordLabel : Labels.RecordingInProgressLabel
     }
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
