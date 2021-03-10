@@ -10,15 +10,16 @@ import AVFoundation
 
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
-    var audioRecorder: AVAudioRecorder!
-    
     @IBOutlet weak var recordingLabel: UILabel!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopRecordingButton: UIButton!
     
-    struct Labels {
+    var audioRecorder: AVAudioRecorder!
+    
+    enum Constants {
         static let RecordingInProgressLabel = "Recording in progress"
         static let TapToRecordLabel = "Tap to Record"
+        static let ViewControllerIdentifier = "stopRecording"
     }
     
     override func viewDidLoad() {
@@ -62,7 +63,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if flag {
-            performSegue(withIdentifier: "stopRecording", sender: audioRecorder.url)
+            performSegue(withIdentifier: Constants.ViewControllerIdentifier, sender: audioRecorder.url)
         } else {
             print("Recording was not successfull")
         }
@@ -72,11 +73,11 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         recordButton.isEnabled = enabled
         stopRecordingButton.isEnabled = !enabled
         
-        recordingLabel.text = enabled ? Labels.TapToRecordLabel : Labels.RecordingInProgressLabel
+        recordingLabel.text = enabled ? Constants.TapToRecordLabel : Constants.RecordingInProgressLabel
     }
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-           if segue.identifier == "stopRecording",
+           if segue.identifier == Constants.ViewControllerIdentifier,
               let playSoundsVC = segue.destination as? PlaySoundsViewController,
               let recordedAudioURL = sender as? URL {
                playSoundsVC.recordedAudioURL = recordedAudioURL
